@@ -18,10 +18,7 @@ package gcp
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
 	"net/url"
 	"strings"
 	"time"
@@ -31,6 +28,7 @@ import (
 	"github.com/google/go-containerregistry/pkg/name"
 
 	"github.com/fluxcd/pkg/oci"
+	"golang.org/x/oauth2/google"
 )
 
 type gceToken struct {
@@ -79,54 +77,34 @@ func (c *Client) WithTokenURL(url string) *Client {
 	return c
 }
 
-// getLoginAuth obtains authentication by getting a token from the metadata API
-// on GCP. This assumes that the pod has right to pull the image which would be
-// the case if it is hosted on GCP. It works with both service account and
-// workload identity enabled clusters.
+// getLoginAuth obtains authentication using the default GCP credential chain.
+// This supports various authentication methods including service account JSON,
+// external account JSON, user credentials, and GCE metadata service.
 func (c *Client) getLoginAuth(ctx context.Context) (authn.AuthConfig, time.Time, error) {
 	var authConfig authn.AuthConfig
 
-	request, err := http.NewRequestWithContext(ctx, http.MethodGet, c.tokenURL, nil)
+	// Define the required scopes for accessing GCR.
+	scopes := []string{"https://www.googleapis.com/auth/cloud-platform"}
+
+	// Obtain the default token source.
+	tokenSource, err := google.DefaultTokenSource(ctx, scopes...)
 	if err != nil {
-		return authConfig, time.Time{}, err
+		return authConfig, time.Time{}, fmt.Errorf("failed to get default token source: %w", err)
 	}
 
-	request.Header.Add("Metadata-Flavor", "Google")
-
-	var transport http.RoundTripper
-	if c.proxyURL != nil {
-		t := http.DefaultTransport.(*http.Transport).Clone()
-		t.Proxy = http.ProxyURL(c.proxyURL)
-		transport = t
-	}
-
-	client := &http.Client{Transport: transport}
-	response, err := client.Do(request)
+	// Retrieve the token.
+	token, err := tokenSource.Token()
 	if err != nil {
-		return authConfig, time.Time{}, err
-	}
-	defer response.Body.Close()
-	defer io.Copy(io.Discard, response.Body)
-
-	if response.StatusCode != http.StatusOK {
-		return authConfig, time.Time{}, fmt.Errorf("unexpected status from metadata service: %s", response.Status)
+		return authConfig, time.Time{}, fmt.Errorf("failed to obtain token: %w", err)
 	}
 
-	var accessToken gceToken
-	decoder := json.NewDecoder(response.Body)
-	if err := decoder.Decode(&accessToken); err != nil {
-		return authConfig, time.Time{}, err
-	}
-
+	// Set up the authentication configuration.
 	authConfig = authn.AuthConfig{
 		Username: "oauth2accesstoken",
-		Password: accessToken.AccessToken,
+		Password: token.AccessToken,
 	}
 
-	// add expiresIn seconds to the current time to get the expiry time
-	expiresAt := time.Now().Add(time.Duration(accessToken.ExpiresIn) * time.Second)
-
-	return authConfig, expiresAt, nil
+	return authConfig, token.Expiry, nil
 }
 
 // Login attempts to get the authentication material for GCR.
