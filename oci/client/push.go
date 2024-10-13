@@ -32,7 +32,7 @@ import (
 	"github.com/google/go-containerregistry/pkg/v1/tarball"
 	"github.com/google/go-containerregistry/pkg/v1/types"
 
-	"github.com/fluxcd/pkg/oci"
+	"github.com/ascend-io/pkg/oci"
 )
 
 // LayerType is an enumeration of the supported layer types

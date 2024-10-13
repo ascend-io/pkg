@@ -33,7 +33,7 @@ import (
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
 
-	"github.com/fluxcd/pkg/oci"
+	"github.com/ascend-io/pkg/oci"
 )
 
 // Default cache expiration time in seconds for ACR refresh token.

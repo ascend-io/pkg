@@ -1,21 +1,21 @@
-module github.com/fluxcd/pkg/oci/tests/integration
+module github.com/ascend-io/pkg/oci/tests/integration
 
 go 1.22.4
 
 replace (
+	github.com/ascend-io/pkg/oci => ../../
 	github.com/fluxcd/pkg/auth => ../../../auth
 	github.com/fluxcd/pkg/cache => ../../../cache
 	github.com/fluxcd/pkg/git => ../../../git
 	github.com/fluxcd/pkg/git/gogit => ../../../git/gogit
-	github.com/fluxcd/pkg/oci => ../../
 )
 
 require (
+	github.com/ascend-io/pkg/oci v0.40.0
 	github.com/fluxcd/pkg/auth v0.0.1
 	github.com/fluxcd/pkg/cache v0.0.4
 	github.com/fluxcd/pkg/git v0.20.0
 	github.com/fluxcd/pkg/git/gogit v0.19.0
-	github.com/fluxcd/pkg/oci v0.40.0
 	github.com/fluxcd/test-infra/tftestenv v0.0.0-20240805120810-5b91964f964f
 	github.com/go-git/go-git/v5 v5.12.0
 	github.com/google/go-containerregistry v0.20.2

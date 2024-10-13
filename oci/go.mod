@@ -1,4 +1,4 @@
-module github.com/fluxcd/pkg/oci
+module github.com/ascend-io/pkg/oci
 
 go 1.22.4
 

@@ -36,7 +36,7 @@ import (
 	"github.com/google/go-containerregistry/pkg/v1/types"
 	. "github.com/onsi/gomega"
 
-	"github.com/fluxcd/pkg/oci"
+	"github.com/ascend-io/pkg/oci"
 )
 
 func Test_Push_Pull(t *testing.T) {

@@ -26,11 +26,11 @@ import (
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
 
+	"github.com/ascend-io/pkg/oci"
+	"github.com/ascend-io/pkg/oci/auth/aws"
+	"github.com/ascend-io/pkg/oci/auth/azure"
+	"github.com/ascend-io/pkg/oci/auth/gcp"
 	"github.com/fluxcd/pkg/cache"
-	"github.com/fluxcd/pkg/oci"
-	"github.com/fluxcd/pkg/oci/auth/aws"
-	"github.com/fluxcd/pkg/oci/auth/azure"
-	"github.com/fluxcd/pkg/oci/auth/gcp"
 )
 
 // ImageRegistryProvider analyzes the provided registry and returns the identified

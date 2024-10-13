@@ -32,11 +32,11 @@ import (
 	. "github.com/onsi/gomega"
 	"golang.org/x/oauth2"
 
+	"github.com/ascend-io/pkg/oci"
+	"github.com/ascend-io/pkg/oci/auth/aws"
+	"github.com/ascend-io/pkg/oci/auth/azure"
+	"github.com/ascend-io/pkg/oci/auth/gcp"
 	"github.com/fluxcd/pkg/cache"
-	"github.com/fluxcd/pkg/oci"
-	"github.com/fluxcd/pkg/oci/auth/aws"
-	"github.com/fluxcd/pkg/oci/auth/azure"
-	"github.com/fluxcd/pkg/oci/auth/gcp"
 )
 
 type fakeTokenSource struct {

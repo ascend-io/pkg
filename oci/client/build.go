@@ -26,7 +26,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fluxcd/pkg/oci/client/internal/fs"
+	"github.com/ascend-io/pkg/oci/client/internal/fs"
 	"github.com/fluxcd/pkg/sourceignore"
 )
 

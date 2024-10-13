@@ -34,7 +34,7 @@ import (
 	"github.com/go-logr/logr"
 	"github.com/google/go-containerregistry/pkg/authn"
 
-	"github.com/fluxcd/pkg/oci"
+	"github.com/ascend-io/pkg/oci"
 )
 
 var registryPartRe = regexp.MustCompile(`([0-9+]*).dkr.ecr(?:-fips)?\.([^/.]*)\.(amazonaws\.com[.cn]*)`)
