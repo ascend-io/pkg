@@ -30,8 +30,8 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
+	"github.com/ascend-io/pkg/oci/auth/login"
 	"github.com/fluxcd/pkg/cache"
-	"github.com/fluxcd/pkg/oci/auth/login"
 )
 
 // registry and repo flags are to facilitate testing of two login scenarios:

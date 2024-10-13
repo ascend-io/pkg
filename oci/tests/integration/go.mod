@@ -1,15 +1,15 @@
-module github.com/fluxcd/pkg/oci/tests/integration
+module github.com/ascend-io/pkg/oci/tests/integration
 
 go 1.22.4
 
 replace (
 	github.com/fluxcd/pkg/cache => ../../../cache
-	github.com/fluxcd/pkg/oci => ../../
+	github.com/ascend-io/pkg/oci => ../../
 )
 
 require (
 	github.com/fluxcd/pkg/cache v0.0.4
-	github.com/fluxcd/pkg/oci v0.40.0
+	github.com/ascend-io/pkg/oci v0.40.0
 	github.com/fluxcd/test-infra/tftestenv v0.0.0-20240805120810-5b91964f964f
 	github.com/google/go-containerregistry v0.20.2
 	github.com/hashicorp/terraform-exec v0.21.0

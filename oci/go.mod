@@ -1,4 +1,4 @@
-module github.com/fluxcd/pkg/oci
+module github.com/ascend-io/pkg/oci
 
 go 1.22.4
 
@@ -26,6 +26,7 @@ require (
 	github.com/google/go-containerregistry v0.20.2
 	github.com/onsi/gomega v1.34.2
 	github.com/sirupsen/logrus v1.9.3
+	golang.org/x/oauth2 v0.23.0
 )
 
 require (
@@ -137,7 +138,6 @@ require (
 	go.starlark.net v0.0.0-20230525235612-a134d8f9ddca // indirect
 	golang.org/x/crypto v0.27.0 // indirect
 	golang.org/x/net v0.29.0 // indirect
-	golang.org/x/oauth2 v0.23.0 // indirect
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.25.0 // indirect
 	golang.org/x/term v0.24.0 // indirect
